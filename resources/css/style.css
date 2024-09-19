@@ -330,6 +330,35 @@ form input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
+/* Print-specific styles */
+@media print {
+    /* Change the header color in print view */
+    .results-table th {
+        background-color: #000000 !important; /* Ensure black header background in print */
+        color: #ffffff !important; /* Ensure white text in print */
+        -webkit-print-color-adjust: exact; /* Ensure colors are printed exactly */
+        print-color-adjust: exact;
+    }
+
+    /* Optionally, change the cell borders and other print-specific styles */
+    .results-table td, .results-table th {
+        border: 0.4px solid #2d2d2d; /* Darker border in print view */
+    }
+
+    /* Apply Tajawal font for the subjects during print */
+    .results-table td {
+        font-family: 'Tajawal', sans-serif !important; /* Tajawal font for print */
+    }
+
+    /* Optionally, hide elements not required for print */
+    .results-view {
+        background: none !important; /* Remove background */
+        padding: 0 !important;       /* Remove padding */
+        box-shadow: none !important; /* Remove box-shadow */
+        border: none !important;     /* Remove border */
+    }
+}
+
 
 /* CSS FOR MESSAGE */
 
@@ -346,12 +375,27 @@ form input[type="submit"] {
 }
 
 .message p {
-    
     color: #ffffff; /* White text for contrast */
     font-size: 18px; /* Font size similar to your previous content */
     font-family: 'Tajawal', sans-serif; /* Consistent font with your other styles */
     text-align: justify; /* Justify the paragraph text */
 }
+
+/* Add media print rules separately */
+@media print {
+    /* Hide the message and button group on print */
+    .message {
+        display: none;
+    }
+}
+
+@media print {
+    /* Hide the message and button group on print */
+    .results-view .button-group {
+        display: none;
+    }
+}
+
 
 /* CSS FOR COPYRIGHT */
 

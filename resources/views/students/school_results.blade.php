@@ -14,6 +14,7 @@
 <body>
     <div class="app">
         <div class="home school-results-view">
+            <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header">
             <h1>Results for School Code: {{ $school_code }}</h1>
 
             <table class="school-results-table">

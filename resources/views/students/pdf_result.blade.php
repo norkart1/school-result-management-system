@@ -176,6 +176,7 @@ body {
 </head>
 <body>
     <div class="results-view">
+        <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header">
         <h1>{{ $student->name }}</h1>
         <p><strong>Roll Number:</strong> {{ $student->roll_number }}</p>
         <p><strong>School Code:</strong> {{ $student->school_code }}</p>

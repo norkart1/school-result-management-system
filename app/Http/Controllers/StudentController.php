@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf; // Import the DomPDF facade
 
 class StudentController extends Controller
 {
@@ -62,5 +63,21 @@ class StudentController extends Controller
 
         // Return a view with the list of students
         return view('students.school_results', ['students' => $students, 'school_code' => $request->school_code]);
+    }
+
+    // Download the result as PDF
+    public function download($roll_number)
+    {
+        $student = Student::where('roll_number', $roll_number)->first();
+        
+        if (!$student) {
+            return redirect()->back()->with('error', 'Student not found.');
+        }
+
+        // Prepare the view and data for the PDF
+        $pdf = Pdf::loadView('students.pdf_result', compact('student'));
+
+        // Download the PDF file
+        return $pdf->download('result_'.$student->roll_number.'.pdf');
     }
 }

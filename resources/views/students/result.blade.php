@@ -58,7 +58,8 @@
     </div>
 
     <div class="button-container">
-        <a href="{{ route('students.download', ['roll_number' => $student->roll_number]) }}">Download</a>
+        <a href="{{ route('students.download', $student->roll_number) }}">Download PDF</a>
+
     </div>
 
     <div class="button-container">

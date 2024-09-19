@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
 // PDF DOWNLOAD
+// Route to generate PDF based on roll number
 Route::get('/students/download/{roll_number}', [StudentController::class, 'download'])->name('students.download');
 
 // Home route - Index page for searching students

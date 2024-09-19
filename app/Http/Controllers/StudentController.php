@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mpdf\Mpdf; // Import the mPDF class
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
@@ -66,18 +67,43 @@ class StudentController extends Controller
     }
 
     // Download the result as PDF
-    public function download($roll_number)
-    {
-        $student = Student::where('roll_number', $roll_number)->first();
-        
-        if (!$student) {
-            return redirect()->back()->with('error', 'Student not found.');
-        }
+// Method to generate and download PDF
 
-        // Prepare the view and data for the PDF
-        $pdf = Pdf::loadView('students.pdf_result', compact('student'));
 
-        // Download the PDF file
-        return $pdf->download('result_'.$student->roll_number.'.pdf');
+public function download($roll_number)
+{
+    // Find the student by roll number
+    $student = Student::where('roll_number', $roll_number)->first();
+
+    if (!$student) {
+        return redirect()->back()->with('error', 'Student not found.');
     }
+
+    // Load the view file for generating the PDF, passing the student data
+    $html = view('students.pdf_result', compact('student'))->render();
+
+    // Create a new instance of mPDF with RTL support
+    $mpdf = new Mpdf([
+        'mode' => 'utf-8', // Ensure the encoding is set to UTF-8 for Arabic support
+        'format' => 'A4',
+        'orientation' => 'P',
+        'default_font' => 'Tajawal', // Ensure the Arabic font
+        'directionality' => 'rtl', // Set the text direction to RTL
+        'autoScriptToLang' => true, // Enable auto script language detection
+        'autoLangToFont' => true,  // Enable automatic language to font assignment
+    ]);
+
+    // Explicitly set RTL direction for the PDF
+    $mpdf->SetDirectionality('rtl');
+    
+    // Write the HTML content to the PDF
+    $mpdf->WriteHTML($html);
+
+    // Set the filename for the PDF
+    $filename = 'result_' . $student->roll_number . '.pdf';
+
+    // Output the PDF to download
+    return $mpdf->Output($filename, 'D'); // 'D' will force download
+}
+
 }

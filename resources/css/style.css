@@ -394,6 +394,7 @@ form input[type="submit"] {
     font-family: 'Tajawal', sans-serif;
 }
 
+/* Table Styling */
 .school-results-table {
     width: 100%;
     border-collapse: separate; /* Use separate to allow border-radius */
@@ -402,6 +403,7 @@ form input[type="submit"] {
     background-color: #ffffff;
     border-radius: 12px; /* Add border-radius to the table */
     overflow: hidden; /* Ensure the content stays inside the rounded corners */
+    overflow-x: auto; /* Add horizontal scrolling on mobile */
 }
 
 .school-results-table th, .school-results-table td {
@@ -419,7 +421,7 @@ form input[type="submit"] {
     font-size: 18px;
 }
 
-/* Add border-radius to the top-left and top-right corners of the table */
+/* Rounded Corners */
 .school-results-table th:first-child {
     border-top-left-radius: 12px;
 }
@@ -428,7 +430,6 @@ form input[type="submit"] {
     border-top-right-radius: 12px;
 }
 
-/* Add border-radius to the bottom-left and bottom-right corners of the table */
 .school-results-table tr:last-child td:first-child {
     border-bottom-left-radius: 12px;
 }
@@ -437,30 +438,16 @@ form input[type="submit"] {
     border-bottom-right-radius: 12px;
 }
 
-.school-results-table td ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.school-results-table td ul li {
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-}
-
+/* Even rows background color */
 .school-results-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+/* Hover effect */
 .school-results-table tr:hover {
     background-color: #f1f1f1;
     transition: background-color 0.3s ease;
 }
-
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
@@ -475,6 +462,7 @@ form input[type="submit"] {
 
     .school-results-table {
         font-size: 12px; /* Reduce font size for smaller screens */
+        overflow-x: auto; /* Add horizontal scrolling */
     }
     
     .school-results-table td ul li {
@@ -490,7 +478,31 @@ form input[type="submit"] {
     }
 }
 
-/* Apply Tajawal font to the subjects list inside the school results table */
+/* Mobile-friendly table scrolling */
+@media (max-width: 576px) {
+    .school-results-table {
+        display: block; /* Forces the table to scroll horizontally */
+        overflow-x: auto; /* Allow table scrolling */
+        white-space: nowrap; /* Prevent text from wrapping inside cells */
+    }
+
+    .school-results-table td, .school-results-table th {
+        white-space: nowrap; /* Prevent cell content from wrapping */
+    }
+
+    /* Buttons on mobile should stack */
+    .school-results-view .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .school-results-view .button-container {
+        width: 100%;
+    }
+}
+
+/* Subjects List inside Table */
 .school-results-table td ul {
     list-style: none;
     padding: 0;
@@ -514,9 +526,7 @@ form input[type="submit"] {
     transform: translateY(-2px);
 }
 
-/* - SCHOOL WISE BOTTOM BUTTONS */
-
-/* Style for the buttons in school results view */
+/* Button Styling */
 .school-results-view .button-container a {
     display: inline-block;
     padding: 10px 20px;
@@ -535,21 +545,9 @@ form input[type="submit"] {
     margin-top: 20px;
 }
 
-/* Hover effect for buttons in school results view */
 .school-results-view .button-container a:hover {
     background-color: #04AA6D;
     color: #ffffff;
     transform: translateY(-2px);
 }
 
-/* Responsive adjustments for button layout in school results view */
-@media (max-width: 768px) {
-    .school-results-view .button-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .school-results-view .button-container {
-        width: 100%;
-    }
-}

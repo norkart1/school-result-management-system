@@ -12,8 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Raleway:wght@300;400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="app">
         <div class="home results-view">
+
+           
+                    <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header">
+                
+                
             <h1> {{ $student->name }}</h1>
 
             <p><strong>Roll Number:</strong> {{ $student->roll_number }}</p>

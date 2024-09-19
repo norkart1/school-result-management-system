@@ -7,8 +7,8 @@
 
     <!-- CSS link or use inline style -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Vite: Load compiled style.css -->
-    @vite('resources/css/style.css')
+
+      
 
     <style>
         body {
@@ -16,22 +16,40 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        .left-section {
-            flex: 1;
+            background-color: #2F4960; /* Full body background color */
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            background-color: #ffffff; /* White background for the main container */
+            border-radius: 16px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .footer p {
+    margin: 0;
+}
+
+
+        .left-section {
+            flex: 1;
             background-color: #ffffff;
             padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
         }
+
 
         .right-section {
             flex: 1;
@@ -62,6 +80,7 @@
             padding: 10px;
             background-color: transparent;
             border: none;
+            border-radius: 16px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
@@ -101,7 +120,7 @@
         }
 
         @media (max-width: 768px) {
-            .container {
+            .main-container {
                 flex-direction: column;
             }
 
@@ -120,7 +139,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="main-container">
     <div class="left-section">
         <div class="form-container">
             <h2>Check Your Results</h2>
@@ -144,7 +163,15 @@
                     <input type="submit" value="Search">
                 </form>
             </div>
+
+             <!-- Footer Section -->
+        <footer class="footer">
+            <p>Powered by Suffa Dars © Alathurpadi Dars</p>
+        </footer>
         </div>
+
+        
+
     </div>
 
     <div class="right-section">

@@ -13,6 +13,13 @@ Route::get('/results', function () {
     return view('dars_results');
 })->name('dars.results');
 
+// NEW FORM
+
+// Route to handle the form for both searches
+Route::get('/new-form', function () {
+    return view('new-form');
+})->name('new.form');
+
 // SCHOOL WISE RESULT
 
 // Route to display the form to input the school code

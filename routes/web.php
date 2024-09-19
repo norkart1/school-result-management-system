@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
-// PDF DOWNLOAD
-// Route to generate PDF based on roll number
-Route::get('/students/download/{roll_number}', [StudentController::class, 'download'])->name('students.download');
-
 // Home route - Index page for searching students
 Route::get('/', [StudentController::class, 'index'])->name('students.index');
+
+// Both result in Single Page
+
+// Route to display the results search page
+Route::get('/results', function () {
+    return view('dars_results');
+})->name('dars.results');
 
 // SCHOOL WISE RESULT
 
@@ -20,8 +23,17 @@ Route::post('/school-results', [StudentController::class, 'getSchoolResults'])->
 
 // SCHOOL WISE RESULT END
 
+// STUDENT WISE RESULT
+
 // Search results route - Handles the search functionality
 Route::post('/search', [StudentController::class, 'search'])->name('students.search');
+
+// PDF DOWNLOAD
+
+// Route to generate PDF based on roll number
+Route::get('/students/download/{roll_number}', [StudentController::class, 'download'])->name('students.download');
+
+// TEST ROUTE
 
 // Test route - To test if the CSV file is accessible and readable
 Route::get('/test-csv', function () {

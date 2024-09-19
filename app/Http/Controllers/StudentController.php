@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student; // Assuming you have a Student model
+use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -36,5 +36,31 @@ class StudentController extends Controller
 
         // If student is found, return a view with the student data
         return view('students.result', ['student' => $student]);
+    }
+
+    // Show the form to input the school code
+    public function showSchoolForm()
+    {
+        return view('students.school'); // A form for entering the school code
+    }
+
+    // Handle the form submission and search for students by school code
+    public function getSchoolResults(Request $request)
+    {
+        // Validate the input (ensure school_code is provided)
+        $request->validate([
+            'school_code' => 'required|string',
+        ]);
+
+        // Search for all students by the school code
+        $students = Student::where('school_code', $request->school_code)->get();
+
+        // If no students found, return an error message
+        if ($students->isEmpty()) {
+            return redirect()->back()->with('error', 'No students found for this school code.');
+        }
+
+        // Return a view with the list of students
+        return view('students.school_results', ['students' => $students, 'school_code' => $request->school_code]);
     }
 }

@@ -372,9 +372,12 @@ form input[type="submit"] {
 
 .school-results-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate; /* Use separate to allow border-radius */
+    border-spacing: 0; /* Remove extra spacing between cells */
     margin-top: 20px;
     background-color: #ffffff;
+    border-radius: 12px; /* Add border-radius to the table */
+    overflow: hidden; /* Ensure the content stays inside the rounded corners */
 }
 
 .school-results-table th, .school-results-table td {
@@ -390,6 +393,24 @@ form input[type="submit"] {
     background-image: linear-gradient(to bottom, #00BC7E, #108775);
     color: #ffffff;
     font-size: 18px;
+}
+
+/* Add border-radius to the top-left and top-right corners of the table */
+.school-results-table th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.school-results-table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+/* Add border-radius to the bottom-left and bottom-right corners of the table */
+.school-results-table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.school-results-table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
 }
 
 .school-results-table td ul {
@@ -415,6 +436,7 @@ form input[type="submit"] {
     background-color: #f1f1f1;
     transition: background-color 0.3s ease;
 }
+
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {

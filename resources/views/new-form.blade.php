@@ -11,130 +11,158 @@
       
 
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            background-color: #2F4960; /* Full body background color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
 
-        .main-container {
-            background-color: #ffffff; /* White background for the main container */
-            border-radius: 16px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-            width: 100%;
-            height: auto;
-            overflow: hidden;
-            display: flex;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #2F4960; /* Full body background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .footer p {
+.main-container {
+    background-color: #ffffff; /* White background for the main container */
+    border-radius: 16px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+}
+
+.footer p {
     margin: 0;
 }
 
+.left-section {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    position: relative;
+}
 
-        .left-section {
-            flex: 1;
-            background-color: #ffffff;
-            padding: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-        }
+.right-section {
+    flex: 1;
+    background-image: url('{{ asset('images/gateway-image.jpg') }}');
+    background-size: cover;
+    background-position: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tab-buttons button {
+    flex: 1;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.tab-buttons button.active {
+    background-color: #2F4960;
+    color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    background-color: #2F4960;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Footer Styling */
+.footer {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+    flex-shrink: 0; /* Ensure the footer remains centered */
+}
+
+/* Mobile View Styling */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .right-section {
+        height: 40vh;
+        flex: none;
+    }
+
+    .left-section {
+        height: 60vh;
+        flex: none;
+        padding: 30px;
+
+        /* Center content vertically and horizontally in mobile view */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .footer {
+        margin-top: 20px;
+    }
+}
 
 
-        .right-section {
-            flex: 1;
-            background-image: url('{{ asset('images/gateway-image.jpg') }}');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .tab-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .tab-buttons button {
-            flex: 1;
-            padding: 10px;
-            background-color: transparent;
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            transition: background-color 0.3s ease;
-        }
-
-        .tab-buttons button.active {
-            background-color: #2F4960;
-            color: #ffffff;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        form input[type="submit"] {
-            background-color: #2F4960;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-            }
-
-            .right-section {
-                height: 40vh;
-                flex: none;
-            }
-
-            .left-section {
-                height: 60vh;
-                flex: none;
-                padding: 30px;
-            }
-        }
     </style>
 </head>
 <body>

@@ -279,7 +279,8 @@ form input[type="submit"] {
 
 .results-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate; /* Use 'separate' to allow border-radius */
+    border-spacing: 0; /* No gaps between cells */
     margin-top: 20px;
     background-color: #ffffff; /* Ensure white background */
 }
@@ -298,14 +299,37 @@ form input[type="submit"] {
     font-size: 18px;
 }
 
+/* Top-left corner: Subject column (second column) */
+.results-table th:last-child {
+    border-top-left-radius: 12px;
+}
+
+/* Top-right corner: Marks column (first column) */
+.results-table th:first-child {
+    border-top-right-radius: 12px;
+}
+
+/* Bottom-left corner: Subject column (second column) */
+.results-table tr:last-child td:last-child {
+    border-bottom-left-radius: 12px;
+}
+
+/* Bottom-right corner: Marks column (first column) */
+.results-table tr:last-child td:first-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Even row background color */
 .results-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+/* Hover effect */
 .results-table tr:hover {
     background-color: #f1f1f1;
     transition: background-color 0.3s ease;
 }
+
 
 /* CSS FOR MESSAGE */
 

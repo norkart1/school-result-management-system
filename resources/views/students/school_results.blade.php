@@ -5,32 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Results for {{ $school_code }}</title>
 
+    <!-- Vite: Load compiled style.css -->
     @vite('resources/css/style.css')
+
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Raleway:wght@300;400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app">
-        <div class="home results-view">
+        <div class="home school-results-view">
             <h1>Results for School Code: {{ $school_code }}</h1>
 
-            <table>
+            <table class="school-results-table">
                 <thead>
                     <tr>
-                        <th>Roll Number</th>
-                        <th>Name</th>
-                        <th>Class</th>
-                        <th>Total Marks</th>
-                        <th>Grade</th>
                         <th>Subjects</th>
+                        <th>Grade</th>
+                        <th>Total Marks</th>
+                        <th>Class</th>
+                        <th>Name</th>
+                        <th>Roll Number</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <td>{{ $student->roll_number }}</td>
-                            <td>{{ $student->name }}</td>
-                            <td>{{ $student->category_code }}</td>
-                            <td>{{ $student->total_marks }}</td>
-                            <td>{{ $student->grade }}</td>
                             <td>
                                 <ul>
                                     @foreach ($student->subjects as $subject)
@@ -38,12 +37,27 @@
                                     @endforeach
                                 </ul>
                             </td>
+                            <td>{{ $student->grade }}</td>
+                            <td>{{ $student->total_marks }}</td>
+                            <td>{{ $student->category_code }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->roll_number }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
-            <a href="{{ route('school.search.form') }}">Search Again</a>
+
+            <div class="button-group">
+                <div class="button-container">
+                    <a href="{{ route('school.search.form') }}">Search Again</a>
+                </div>
+                
+            </div>
+
+            <div class="copyright">
+                <p>© SUFFA DARS COORDINATION</p>
+            </div>
         </div>
     </div>
 </body>

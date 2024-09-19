@@ -347,3 +347,163 @@ form input[type="submit"] {
     direction: ltr; /* Set the text direction to left-to-right */
     unicode-bidi: embed; /* Ensure proper handling of bidirectional text */
 }
+
+
+/* SCHOOL WISE RESULT */
+
+/* School Results View */
+.school-results-view {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 1000px; /* Wider box for school results */
+    margin: 0 auto;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+.school-results-view h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color:#108775;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.school-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+}
+
+.school-results-table th, .school-results-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 16px;
+}
+
+.school-results-table th {
+    background-color: #2F4960;
+    background-image: linear-gradient(to bottom, #00BC7E, #108775);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.school-results-table td ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.school-results-table td ul li {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.school-results-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.school-results-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .school-results-view {
+        max-width: 100%;
+        padding: 20px 15px;
+    }
+
+    .school-results-table th, .school-results-table td {
+        font-size: 14px;
+    }
+
+    .school-results-table {
+        font-size: 12px; /* Reduce font size for smaller screens */
+    }
+    
+    .school-results-table td ul li {
+        font-size: 14px;
+    }
+
+    .school-results-table th, .school-results-table td {
+        padding: 8px; /* Less padding for smaller screens */
+    }
+
+    .school-results-view h1 {
+        font-size: 24px; /* Smaller heading for smaller screens */
+    }
+}
+
+/* Apply Tajawal font to the subjects list inside the school results table */
+.school-results-table td ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.school-results-table td ul li {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-family: 'Tajawal', sans-serif; /* Set Tajawal font here */
+    color: #333; /* You can adjust this color as needed */
+    text-align: right; /* Adjust text alignment for better readability */
+}
+
+.school-results-table td ul li:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-2px);
+}
+
+/* - SCHOOL WISE BOTTOM BUTTONS */
+
+/* Style for the buttons in school results view */
+.school-results-view .button-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px solid #04AA6D;
+    color: #04AA6D;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Hover effect for buttons in school results view */
+.school-results-view .button-container a:hover {
+    background-color: #04AA6D;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments for button layout in school results view */
+@media (max-width: 768px) {
+    .school-results-view .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .school-results-view .button-container {
+        width: 100%;
+    }
+}

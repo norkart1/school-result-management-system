@@ -54,7 +54,7 @@
 
 <div class="button-group">
     <div class="button-container">
-        <a href="#">Print Result</a>
+        <a href="#" onclick="printResult()">Print Result</a>
     </div>
 
     <div class="button-container">
@@ -66,6 +66,11 @@
     </div>
 </div>
 
+<script>
+    function printResult() {
+        window.print();
+    }
+    </script>
 
 <div class="copyright">
     <p> © SUFFA DARS COORDINATION </P></div>

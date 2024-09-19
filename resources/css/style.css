@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: #2F4960;
+    background-image: linear-gradient(to bottom right, #2F4960 10%, #102040);
+    font-family: 'Poppins', sans-serif;
+}
+
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.home {
+    width: 100%;
+    max-width: 400px;
+    padding: 50px 30px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.home h1{
+   padding-bottom: 15px;
+   
+}
+
+form {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 50px 30px;
+    background-image: linear-gradient(to bottom, #00BC7E, #108775);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+}
+
+form h1 {
+    color: #FFF;
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.err-msg {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: red;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+form .form-group {
+    margin-bottom: 30px;
+}
+
+form label {
+    display: block;
+    color:#eee;
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+form input {
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+form input:not([type="submit"]) {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    transition: 0.4s;
+    color: #222;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+form input:not([type="submit"])::placeholder {
+    color: #CCC;
+}
+
+form input:not([type="submit"]):focus, form input:not([type="submit"]):valid {
+    background-color: #fff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #2F4960;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    transition: 0.4s;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.text-muted {
+    color: #fbfcfd!important;
+}
+
+/* Additional Styles for Arabic Text in Results View */
+.results-view {
+    font-family: 'Tajawal', sans-serif;
+    text-align: right; /* Align text to the right for Arabic */
+    direction: rtl; /* Set direction to RTL for Arabic */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    form, .home {
+        max-width: 90%;
+        padding: 30px 20px;
+    }
+}
+
+
+/* RESULTS CSS */
+
+/* General CSS for layout and form are already in place. */
+
+/* Results View Specific Styles */
+.results-view {
+    font-family: 'Tajawal', sans-serif; /* Use Tajawal for Arabic text */
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 50px 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+.results-view h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color:#108775;
+    font-family: 'Tajawal', sans-serif;
+
+    /* color: #2F4960; Dark color for the main header */
+}
+
+.results-view p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.results-view h3 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #2F4960;
+}
+
+.results-view ul {
+    list-style: none;
+    padding: 0;
+}
+
+.results-view ul li {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.results-view strong {
+    color: #2F4960; /* Dark blue color for emphasis */
+}
+
+/* Button group for flex layout */
+.results-view .button-group {
+    display: flex; /* Use flexbox to align items in a row */
+    justify-content: space-between; /* Space evenly between buttons */
+    gap: 15px; /* Add space between the buttons */
+    margin-top: 20px;
+}
+
+.results-view .button-container {
+    flex: 1; /* Allow the buttons to adjust to available space */
+    text-align: center; /* Center the button within the container */
+}
+
+/* BOTTOM BUTTONS STYLING */
+
+/* Style for the buttons */
+.results-view .button-container a {
+    display: inline-block;
+    padding: 10px 20px; /* Adjusted padding for more width */
+    background-color: transparent; /* Transparent background for stroke effect */
+    border: 2px solid #04AA6D; /* Solid border with green color */
+    color: #04AA6D; /* Text color matching the border */
+    font-size: 16px; /* Slightly smaller font size */
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+    white-space: nowrap; /* Prevent text from wrapping */
+    width: 100%; /* Ensure button takes up full width of the flex item */
+    text-align: center; /* Center the text inside the button */
+}
+
+/* Hover effect */
+.results-view .button-container a:hover {
+    background-color: #04AA6D; /* On hover, fill the background with green */
+    color: #ffffff; /* Change text color to white on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .results-view .button-group {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        gap: 10px; /* Reduce gap between buttons */
+    }
+
+    .results-view .button-container {
+        width: 100%; /* Ensure each button takes full width on small screens */
+    }
+}
+
+/* RESULTS GRID */
+
+/* RESULTS GRID */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 15px; /* Increased gap for better spacing */
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px; /* Added padding for better grid appearance */
+}
+
+.results-grid li {
+    padding: 15px 20px; /* More padding for better spacing */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    border-radius: 8px; /* Rounded corners for modern look */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for better depth */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+}
+
+.results-grid li:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.results-grid li:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.grid-header {
+    background-color: #2F4960;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    font-size: 20px; /* Larger font size for headers */
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff; /* Ensure white background */
+}
+
+.results-table th, .results-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: right;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.results-table th {
+    background-color: #2F4960;
+    background-image: linear-gradient(to bottom, #00BC7E, #108775);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.results-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.results-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+/* CSS FOR MESSAGE */
+
+.message {
+    background: linear-gradient(to bottom, #00BC7E, #108775); /* Gradient background */
+    color: #ffffff; /* White text for contrast */
+    padding: 20px; /* Padding inside the message box */
+    border-radius: 12px; /* Rounded corners to match the style */
+    font-size: 18px; /* Font size similar to your previous content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 20px 0; /* Space around the message box */
+    line-height: 1.6; /* Improved readability */
+    font-family: 'Tajawal', sans-serif; /* Consistent font with your other styles */
+}
+
+.message p {
+    
+    color: #ffffff; /* White text for contrast */
+    font-size: 18px; /* Font size similar to your previous content */
+    font-family: 'Tajawal', sans-serif; /* Consistent font with your other styles */
+    text-align: justify; /* Justify the paragraph text */
+}
+
+/* CSS FOR COPYRIGHT */
+
+.results-view .copyright {
+    text-align: center; /* Horizontally center the text */
+    font-size: 14px; /* Adjust font size as needed */
+    color: #333; /* Set the text color */
+    margin-top: 20px; /* Add some space above the copyright text */
+    font-family: 'Tajawal', sans-serif; /* Use a font consistent with your other styles */
+}
+
+.results-view .copyright p {
+    margin: 0; /* Remove default margin from the paragraph */
+    padding-top: 20px;
+    /* font-weight: bold; Make the text bold, if needed */
+    text-align: center; /* Center the text */
+    direction: ltr; /* Set the text direction to left-to-right */
+    unicode-bidi: embed; /* Ensure proper handling of bidirectional text */
+}

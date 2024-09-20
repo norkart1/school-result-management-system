@@ -128,6 +128,20 @@ form input[type="submit"] {
     flex-shrink: 0; /* Ensure the footer remains centered */
 }
 
+.alert {
+    padding: 15px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.alert-danger {
+    background-color: #ffdddd;
+    color: #d8000c;
+}
+
+
 /* Mobile View Styling */
 @media (max-width: 768px) {
     .main-container {
@@ -167,58 +181,65 @@ form input[type="submit"] {
 </head>
 <body>
 
-<div class="main-container">
-    <div class="left-section">
-        <div class="form-container">
-            <h2>Check Your Results</h2>
-            <div class="tab-buttons">
-                <button class="tab-button active" onclick="switchTab(event, 'student-form')">Student Wise</button>
-                <button class="tab-button" onclick="switchTab(event, 'school-form')">School Wise</button>
+    <div class="main-container">
+        <div class="left-section">
+            <div class="form-container">
+                <h2>Check Your Results</h2>
+    
+                <!-- Display error message -->
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+    
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="switchTab(event, 'student-form')">Student Wise</button>
+                    <button class="tab-button" onclick="switchTab(event, 'school-form')">School Wise</button>
+                </div>
+    
+                <div id="student-form" class="tab-content active">
+                    <form action="{{ route('students.search') }}" method="POST">
+                        @csrf
+                        <input type="text" name="roll_number" placeholder="Enter Roll Number" required>
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
+    
+                <div id="school-form" class="tab-content">
+                    <form action="{{ route('school.results') }}" method="POST">
+                        @csrf
+                        <input type="text" name="school_code" placeholder="Enter School Code" required>
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
+    
+                 <!-- Footer Section -->
+            <footer class="footer">
+                <p>Powered by Suffa Dars © Alathurpadi Dars</p>
+            </footer>
             </div>
-
-            <div id="student-form" class="tab-content active">
-                <form action="{{ route('students.search') }}" method="POST">
-                    @csrf
-                    <input type="text" name="roll_number" placeholder="Enter Roll Number" required>
-                    <input type="submit" value="Search">
-                </form>
-            </div>
-
-            <div id="school-form" class="tab-content">
-                <form action="{{ route('school.results') }}" method="POST">
-                    @csrf
-                    <input type="text" name="school_code" placeholder="Enter School Code" required>
-                    <input type="submit" value="Search">
-                </form>
-            </div>
-
-             <!-- Footer Section -->
-        <footer class="footer">
-            <p>Powered by Suffa Dars © Alathurpadi Dars</p>
-        </footer>
+    
         </div>
-
-        
-
+    
+        <div class="right-section">
+            <!-- The background image will be applied here as a cover -->
+        </div>
     </div>
-
-    <div class="right-section">
-        <!-- The background image will be applied here as a cover -->
-    </div>
-</div>
-
-<script>
-    function switchTab(event, tabId) {
-        let tabs = document.querySelectorAll('.tab-content');
-        let buttons = document.querySelectorAll('.tab-button');
-
-        tabs.forEach(tab => tab.classList.remove('active'));
-        buttons.forEach(button => button.classList.remove('active'));
-
-        document.getElementById(tabId).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
-</script>
-
-</body>
+    
+    <script>
+        function switchTab(event, tabId) {
+            let tabs = document.querySelectorAll('.tab-content');
+            let buttons = document.querySelectorAll('.tab-button');
+    
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+    
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+    
+    </body>
+    
 </html>

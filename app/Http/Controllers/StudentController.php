@@ -59,7 +59,7 @@ class StudentController extends Controller
 
         // If no students found, return an error message
         if ($students->isEmpty()) {
-            return redirect()->back()->with('error', 'No students found for this school code.');
+            return redirect()->back()->with('error', 'No school found in this school code.');
         }
 
         // Return a view with the list of students

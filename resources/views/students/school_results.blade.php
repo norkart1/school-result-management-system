@@ -51,7 +51,7 @@
 
             <div class="button-group">
                 <div class="button-container">
-                    <a href="{{ route('school.search.form') }}">Search Again</a>
+                    <a href="{{ route('students.index') }}">Check Another Result</a>
                 </div>
                 
             </div>

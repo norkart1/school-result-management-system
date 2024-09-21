@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
-// Home route - Index page for searching students
-Route::get('/', [StudentController::class, 'index'])->name('students.index');
+// Redirect the home route to /new-form
+Route::get('/', function () {
+    return redirect()->route('new.form');
+})->name('students.index');
 
 // Both result in Single Page
 

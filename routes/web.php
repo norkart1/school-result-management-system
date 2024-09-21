@@ -5,7 +5,7 @@ use App\Http\Controllers\StudentController;
 
 // Redirect the home route to /new-form
 Route::get('/', function () {
-    return redirect()->route('new.form');
+    return view('new-form');
 })->name('students.index');
 
 // Both result in Single Page

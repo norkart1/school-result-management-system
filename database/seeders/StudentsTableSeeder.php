@@ -39,13 +39,22 @@ class StudentsTableSeeder extends Seeder
                     continue; // Skip rows with fewer than 7 columns
                 }
 
+                // Ensure that the `subjects` column is valid JSON
+                $subjectsJson = $data[4];
+                $decodedSubjects = json_decode($subjectsJson, true);
+
+                if (json_last_error() !== JSON_ERROR_NONE) {
+                    Log::error('Invalid JSON in subjects column for roll number: ' . $data[0]);
+                    continue; // Skip rows with invalid JSON
+                }
+
                 // Insert the data into the database
                 DB::table('students')->insert([
                     'roll_number'   => $data[0],
                     'name'          => $data[1],
                     'school_code'   => $data[2],
                     'category_code' => $data[3],
-                    'subjects'      => $data[4],  // Assuming this is stored as a JSON string
+                    'subjects'      => json_encode($decodedSubjects),  // Ensure it's a valid JSON string
                     'total_marks'   => $data[5],
                     'grade'         => $data[6],
                 ]);

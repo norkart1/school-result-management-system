@@ -16,7 +16,7 @@ class CreateStudentsTable extends Migration
             $table->string('category_code');  // Add this column
             $table->json('subjects');  // Add this column if you plan to store JSON
             $table->integer('total_marks');
-            $table->char('grade', 1);
+            $table->char('grade', 15);
             $table->timestamps();
         });
     }

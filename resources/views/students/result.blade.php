@@ -23,13 +23,20 @@
             <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header" id="header-image" style="width: 100%; height: auto;">
             
             <h1>{{ $student->name }}</h1>
+            
+            <div class="results-details">
+                <div class="right">
+    <p><strong>Roll Number:</strong> <span class="value">{{ $student->roll_number }}</span></p>
+    <p><strong>School Code:</strong> <span class="value">{{ $student->school_code }}</span></p>
+    <p class="category"><strong>Category:</strong> <span class="value">{{ $student->category_code }}</span></p>
+</div>
 
-            <p><strong>Roll Number:</strong> {{ $student->roll_number }}</p>
-            <p><strong>School Code:</strong> {{ $student->school_code }}</p>
-            <p><strong>Category:</strong> {{ $student->category_code }}</p>
-            <p><strong>Total Marks:</strong> {{ $student->total_marks }}</p>
-            <p><strong>Grade:</strong> {{ $student->grade }}</p>
-
+                <div class="left">
+                    <p><strong>Total Marks:</strong> {{ $student->total_marks }}</p>
+                    <p><strong>Grade:</strong> {{ $student->grade }}</p>
+                </div>
+            </div>
+            
             {{-- <h3>Subjects and Marks</h3> --}}
             
             <table class="results-table">

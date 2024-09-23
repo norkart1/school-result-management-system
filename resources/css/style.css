@@ -139,8 +139,10 @@ form input[type="submit"] {
 /* General CSS for layout and form are already in place. */
 
 /* Results View Specific Styles */
+
+
 .results-view {
-    font-family: 'Tajawal', sans-serif; /* Use Tajawal for Arabic text */
+    font-family: 'Tajawal', sans-serif;
     background-color: #ffffff;
     border-radius: 16px;
     padding: 50px 30px;
@@ -155,51 +157,75 @@ form input[type="submit"] {
 .results-view h1 {
     font-size: 32px;
     margin-bottom: 20px;
-    color:#108775;
+    color: #108775;
     font-family: 'Tajawal', sans-serif;
-
-    /* color: #2F4960; Dark color for the main header */
 }
 
-.results-view p {
+.results-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+
+.results-details .left, .results-details .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.results-details .left p,
+.results-details .right p {
     font-size: 18px;
     margin-bottom: 10px;
     color: #333;
 }
 
-.results-view h3 {
-    margin-top: 20px;
-    font-size: 24px;
-    color: #2F4960;
-}
-
-.results-view ul {
-    list-style: none;
-    padding: 0;
-}
-
-.results-view ul li {
+/* Left side alignment */
+.results-details .left p {
+    text-align: left; /* Left align the text in the left column */
+    font-family: 'Tajawal', sans-serif;
     font-size: 18px;
-    margin-bottom: 8px;
-    color: #444;
 }
 
-.results-view strong {
-    color: #2F4960; /* Dark blue color for emphasis */
+/* Right side alignment with RTL structure */
+.results-details .right p {
+    text-align: right; /* Right align the text in the right column */
+    direction: rtl; /* Ensure RTL text direction */
 }
+
+.results-details .right p strong {
+    color: #2F4960; /* Emphasized color */
+    display: inline-block;
+    margin-left: 10px; /* Add space between the label and value in RTL */
+    width: 100px; /* Ensure proper space for the label */
+    font-size: 16px;
+}
+
+.results-details .right .value {
+    display: inline-block;
+    text-align: left; /* Align value left relative to the label */
+    margin-left: 10px; /* Spacing between label and value in RTL */
+    white-space: nowrap; /* Prevent text from wrapping */
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+}
+
+
 
 /* Button group for flex layout */
 .results-view .button-group {
-    display: flex; /* Use flexbox to align items in a row */
-    justify-content: space-between; /* Space evenly between buttons */
-    gap: 15px; /* Add space between the buttons */
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
     margin-top: 20px;
 }
 
 .results-view .button-container {
-    flex: 1; /* Allow the buttons to adjust to available space */
-    text-align: center; /* Center the button within the container */
+    flex: 1;
+    text-align: center;
 }
+
 
 /* BOTTOM BUTTONS STYLING */
 

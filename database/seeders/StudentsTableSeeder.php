@@ -23,7 +23,7 @@ class StudentsTableSeeder extends Seeder
         // Open the CSV file
         if (($handle = fopen($csvPath, 'r')) !== false) {
             $isFirstRow = true; // To skip the first row (headers)
-            while (($data = fgetcsv($handle, 1000, ",")) !== false) {  // Use comma as delimiter
+            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
                 // Skip the header row
                 if ($isFirstRow) {
                     $isFirstRow = false;
@@ -41,6 +41,14 @@ class StudentsTableSeeder extends Seeder
 
                 // Ensure that the `subjects` column is valid JSON
                 $subjectsJson = $data[4];
+
+                // Replace empty "marks" fields (without value) with a default value `null`
+                $subjectsJson = preg_replace_callback('/"marks"\s*:\s*([^,}\]]*)/', function ($matches) {
+                    // If the match is empty or invalid, set the value to `null`
+                    return (trim($matches[1]) === '') ? '"marks":null' : $matches[0];
+                }, $subjectsJson);
+
+                // Decode the JSON and validate
                 $decodedSubjects = json_decode($subjectsJson, true);
 
                 if (json_last_error() !== JSON_ERROR_NONE) {

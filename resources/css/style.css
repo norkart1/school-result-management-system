@@ -446,6 +446,12 @@ form input[type="submit"] {
 }
 
 
+/* Class to hide elements only during PDF generation */
+.hide-for-pdf {
+    display: none !important;
+}
+
+
 /* SCHOOL WISE RESULT */
 
 /* School Results View */

@@ -94,29 +94,30 @@
         }
 
         function downloadAsPDF(event) {
-            event.preventDefault(); // Prevent default link behavior
+    event.preventDefault(); // Prevent default link behavior
 
-            // Hide elements that should not be in the PDF
-            document.getElementById('message-section').style.display = 'none';
-            document.getElementById('button-section').style.display = 'none';
+    // Add the class to hide elements that should not be in the PDF
+    document.getElementById('message-section').classList.add('hide-for-pdf');
+    document.getElementById('button-section').classList.add('hide-for-pdf');
 
-            // Generate PDF
-            var element = document.getElementById('results-section'); // The section to convert to PDF
+    // Generate PDF
+    var element = document.getElementById('results-section'); // The section to convert to PDF
 
-            var opt = {
-                margin:       0.5,
-                filename:     'result_{{ $student->roll_number }}.pdf',
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait', textDirection: 'rtl' }
-            };
+    var opt = {
+        margin:       0.5,
+        filename:     'result_{{ $student->roll_number }}.pdf',
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait', textDirection: 'rtl' }
+    };
 
-            html2pdf().from(element).set(opt).save().then(function() {
-                // Restore visibility of the excluded sections after PDF generation
-                document.getElementById('message-section').style.display = 'block';
-                document.getElementById('button-section').style.display = 'block';
-            });
-        }
+    html2pdf().from(element).set(opt).save().then(function() {
+        // Remove the class to restore visibility after PDF generation
+        document.getElementById('message-section').classList.remove('hide-for-pdf');
+        document.getElementById('button-section').classList.remove('hide-for-pdf');
+    });
+}
+
     </script>
 
 </body>

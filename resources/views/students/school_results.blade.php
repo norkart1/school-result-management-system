@@ -98,7 +98,7 @@
                 filename: 'school_results_{{ $school_code }}.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
                 html2canvas: { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait', textDirection: 'rtl' }
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', textDirection: 'rtl' }
             };
 
             html2pdf().from(element).set(opt).save().then(function() {

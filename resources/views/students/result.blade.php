@@ -27,7 +27,7 @@
             <div class="results-details">
                 <div class="right">
     <p><strong>Roll Number:</strong> <span class="value">{{ $student->roll_number }}</span></p>
-    <p><strong>School Code:</strong> <span class="value">{{ $student->school_code }}</span></p>
+    <p><strong>Dars Code:</strong> <span class="value">{{ $student->school_code }}</span></p>
     <p class="category"><strong>Category:</strong> <span class="value">{{ $student->category_code }}</span></p>
 </div>
 

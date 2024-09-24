@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Results for {{ $school_code }}</title>
+    <title>Dars Results for {{ $school_code }} - Suffa Dars Coordination </title>
 
     <!-- Vite: Load compiled style.css -->
     @vite('resources/css/style.css')
@@ -15,7 +15,7 @@
     <div class="app">
         <div class="home school-results-view">
             <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header">
-            <h1>Results for School Code: {{ $school_code }}</h1>
+            <h1>Results for Dars Code: {{ $school_code }}</h1>
 
             <table class="school-results-table">
                 <thead>

@@ -454,6 +454,43 @@ form input[type="submit"] {
 
 /* SCHOOL WISE RESULT */
 
+.grade-counts {
+    font-family: 'Tajawal', sans-serif; /* Arabic font family */
+    background-color: #f9f9f9; /* Light background for readability */
+    padding: 15px 20px; /* Padding inside the grade counts box */
+    border-radius: 8px; /* Rounded corners for a soft look */
+    margin: 20px 0; /* Margin to separate it from other elements */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-align: center; /* Center text for balance */
+    color: #333; /* Standard text color */
+    font-size: 18px; /* Readable font size */
+    font-weight: 500; /* Medium weight for a clearer emphasis */
+    line-height: 1.6; /* Improve readability */
+}
+
+.grade-counts p {
+    margin: 0; /* Remove default paragraph margins */
+    color: #2F4960; /* Dark blue for emphasis */
+}
+
+.grade-counts span {
+    font-weight: bold; /* Bold the counts for emphasis */
+    color: #108775; /* Use the brand green color for the counts */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .grade-counts {
+        font-size: 16px; /* Slightly smaller font for small screens */
+        padding: 10px 15px; /* Adjust padding for smaller viewports */
+    }
+
+    .grade-counts p {
+        line-height: 1.4; /* Tighter line height for compact views */
+    }
+}
+
+
 /* School Results View */
 .school-results-view {
     font-family: 'Tajawal', sans-serif;

@@ -53,18 +53,33 @@ class StudentController extends Controller
         $request->validate([
             'school_code' => 'required|string',
         ]);
-
+    
         // Search for all students by the school code
         $students = Student::where('school_code', $request->school_code)->get();
-
+    
         // If no students found, return an error message
         if ($students->isEmpty()) {
             return redirect()->back()->with('error', 'No school found in this school code.');
         }
-
-        // Return a view with the list of students
-        return view('students.school_results', ['students' => $students, 'school_code' => $request->school_code]);
+    
+        // Grade counts
+        $gradeCounts = [
+            'Distinction' => $students->where('grade', 'Distinction')->count(),
+            'First Class' => $students->where('grade', 'First Class')->count(),
+            'Second Class' => $students->where('grade', 'Second Class')->count(),
+            'Third Class' => $students->where('grade', 'Third Class')->count(),
+            'Failed' => $students->where('grade', 'Failed')->count(),
+            'Not Promoted' => $students->where('grade', 'Not Promoted')->count(),
+        ];
+    
+        // Return a view with the list of students and grade counts
+        return view('students.school_results', [
+            'students' => $students,
+            'school_code' => $request->school_code,
+            'gradeCounts' => $gradeCounts
+        ]);
     }
+    
 
     // Download the result as PDF
 // Method to generate and download PDF

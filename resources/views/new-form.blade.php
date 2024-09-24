@@ -100,13 +100,30 @@ h2 {
 
 form input {
     width: 100%;
-    padding: 10px;
+    padding: 12px 20px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
-    border-radius: 16px;
+    border-radius: 30px; /* Rounded corners */
     font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    background-color: #f8f8f8; /* Light background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+/* Input focus state */
+form input:focus {
+    border-color: #2F4960; /* Darker color when focused */
+    background-color: #fff; /* White background when focused */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on focus */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Input hover state */
+form input:hover {
+    background-color: #fff; /* Light hover effect */
+}
+
+/* Modernized submit button */
 form input[type="submit"] {
     background-color: #2F4960;
     color: #ffffff;
@@ -114,8 +131,37 @@ form input[type="submit"] {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 30px; /* Rounded button */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Button shadow */
 }
 
+/* Submit button hover effect */
+form input[type="submit"]:hover {
+    background-color: #108775; /* Change color on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Submit button focus effect */
+form input[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Tab button styling */
+.tab-buttons button {
+    flex: 1;
+    padding: 12px 20px;
+    background-color: transparent;
+    
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2F4960;
+    transition: all 0.3s ease;
+}
 /* Footer Styling */
 .footer {
     width: 100%;

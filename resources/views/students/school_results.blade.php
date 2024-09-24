@@ -19,13 +19,10 @@
         <div class="home school-results-view" id="results-section">
             <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header">
 
-           
-
             <h1>Results for Dars Code: {{ $school_code }}</h1>
 
-             <!-- Grade Counts -->
-            
-             <div class="grade-counts">
+            <!-- Grade Counts -->
+            <div class="grade-counts">
                 <p>Distinction: <span>{{ $gradeCounts['Distinction'] }}</span> | 
                    First Class: <span>{{ $gradeCounts['First Class'] }}</span> | 
                    Second Class: <span>{{ $gradeCounts['Second Class'] }}</span> | 
@@ -33,7 +30,6 @@
                    Failed: <span>{{ $gradeCounts['Failed'] }}</span> | 
                    Not Promoted: <span>{{ $gradeCounts['Not Promoted'] }}</span></p>
             </div>
-            
 
             <table class="school-results-table">
                 <thead>
@@ -98,8 +94,19 @@
             var element = document.getElementById('results-section'); // The section to convert to PDF
 
             var opt = {
-                margin:       0.5,
-                filename:     'school_results_{{ $school_code }}.pdf',
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
-  
+                margin: 0.5,
+                filename: 'school_results_{{ $school_code }}.pdf',
+                image: { type: 'jpeg', quality: 1.0 },
+                html2canvas: { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait', textDirection: 'rtl' }
+            };
+
+            html2pdf().from(element).set(opt).save().then(function() {
+                // Optional: If you want to perform any actions after the download
+                console.log('PDF Downloaded');
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -669,3 +669,49 @@ form input[type="submit"] {
     transform: translateY(-2px);
 }
 
+/* CSS for School-Wise Result Buttons */
+
+/* School Results Button group for flex layout */
+.school-results-button-group {
+    display: flex; /* Use flexbox to align items in a row */
+    justify-content: space-between; /* Space evenly between buttons */
+    gap: 15px; /* Add space between the buttons */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.school-results-button-container {
+    flex: 1; /* Allow the buttons to adjust to available space */
+    text-align: center; /* Center the button within the container */
+}
+
+/* Style for the buttons */
+.school-results-button-container a {
+    display: inline-block;
+    padding: 10px 20px; /* Adjusted padding for more width */
+    background-color: transparent; /* Transparent background for stroke effect */
+    border: 2px solid #04AA6D; /* Solid border with green color */
+    color: #04AA6D; /* Text color matching the border */
+    font-size: 16px; /* Slightly smaller font size */
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+    white-space: nowrap; /* Prevent text from wrapping */
+    width: 100%; /* Ensure button takes up full width of the flex item */
+    text-align: center; /* Center the text inside the button */
+}
+
+/* Hover effect */
+.school-results-button-container a:hover {
+    background-color: #04AA6D; /* On hover, fill the background with green */
+    color: #ffffff; /* Change text color to white on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Hide school results button group in print and PDF view */
+@media print {
+    .school-results-button-group {
+        display: none;
+    }
+}

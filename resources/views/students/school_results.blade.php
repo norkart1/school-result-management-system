@@ -62,51 +62,60 @@
                 </tbody>
             </table>
 
-            <div class="button-group">
-                <div class="button-container">
-                    <a href="#" onclick="printResult()">Print Result</a>
+            <div class="school-results-button-group" id="school-results-button-section">
+                <div class="school-results-button-container">
+                    <a href="#" onclick="printSchoolResult()">Print Result</a>
                 </div>
-
-                <div class="button-container">
-                    <a href="#" onclick="downloadAsPDF(event)">Download PDF</a>
+            
+                <div class="school-results-button-container">
+                    <a href="#" onclick="downloadSchoolPDF(event)">Download PDF</a>
                 </div>
-
-                <div class="button-container">
+            
+                <div class="school-results-button-container">
                     <a href="{{ route('students.index') }}">Check Another Result</a>
                 </div>
             </div>
-
+            
             <div class="copyright">
                 <p>© SUFFA DARS COORDINATION</p>
             </div>
-        </div>
-    </div>
-
-    <script>
-        function printResult() {
-            window.print();
-        }
-
-        function downloadAsPDF(event) {
-            event.preventDefault(); // Prevent default link behavior
-
-            // Generate PDF
-            var element = document.getElementById('results-section'); // The section to convert to PDF
-
-            var opt = {
-                margin: 0.5,
-                filename: 'school_results_{{ $school_code }}.pdf',
-                image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', textDirection: 'rtl' }
-            };
-
-            html2pdf().from(element).set(opt).save().then(function() {
-                // Optional: If you want to perform any actions after the download
-                console.log('PDF Downloaded');
-            });
-        }
-    </script>
-
+            </div>
+            </div>
+            
+            <script>
+                function printSchoolResult() {
+                    // Hide buttons during print
+                    document.getElementById('school-results-button-section').style.display = 'none';
+                    window.print();
+                    // Show buttons again after print
+                    document.getElementById('school-results-button-section').style.display = 'flex';
+                }
+            
+                function downloadSchoolPDF(event) {
+                    event.preventDefault(); // Prevent default link behavior
+            
+                    // Hide buttons during PDF generation
+                    document.getElementById('school-results-button-section').style.display = 'none';
+            
+                    // Generate PDF
+                    var element = document.getElementById('results-section'); // The section to convert to PDF
+            
+                    var opt = {
+                        margin: 0.5,
+                        filename: 'school_results_{{ $school_code }}.pdf',
+                        image: { type: 'jpeg', quality: 1.0 },
+                        html2canvas: { scale: 3, logging: true, useCORS: true }, // Ensures image rendering
+                        jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', textDirection: 'rtl' }
+                    };
+            
+                    html2pdf().from(element).set(opt).save().then(function() {
+                        // Show buttons again after PDF generation
+                        document.getElementById('school-results-button-section').style.display = 'flex';
+                        console.log('PDF Downloaded');
+                    });
+                }
+            </script>
+            
+            
 </body>
 </html>

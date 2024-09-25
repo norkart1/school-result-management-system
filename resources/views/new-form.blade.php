@@ -74,15 +74,15 @@ h2 {
 
 .tab-buttons button {
     flex: 1;
-    padding: 10px;
+    padding: 12px 20px;
     background-color: transparent;
-    border: none;
-    border-radius: 16px;
+    border-radius: 30px; /* Rounded corners */
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    color: #333;
-    transition: background-color 0.3s ease;
+    color: #2F4960;
+    transition: all 0.3s ease;
+    border: none;
 }
 
 .tab-buttons button.active {
@@ -98,8 +98,16 @@ h2 {
     display: block;
 }
 
+/* Form inputs styling */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements */
+    width: 100%; /* Ensure full width */
+}
+
 form input {
-    width: 100%;
+    width: calc(100% - 40px); /* Ensure consistent width minus padding */
     padding: 12px 20px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -125,6 +133,7 @@ form input:hover {
 
 /* Modernized submit button */
 form input[type="submit"] {
+    width: 100%; /* Ensure the same width as the input */
     background-color: #2F4960;
     color: #ffffff;
     border: none;
@@ -149,29 +158,7 @@ form input[type="submit"]:focus {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Tab button styling */
-.tab-buttons button {
-    flex: 1;
-    padding: 12px 20px;
-    background-color: transparent;
-    
-    border-radius: 30px; /* Rounded corners */
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    color: #2F4960;
-    transition: all 0.3s ease;
-}
-/* Footer Styling */
-.footer {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    color: #333;
-    margin-top: 20px;
-    flex-shrink: 0; /* Ensure the footer remains centered */
-}
-
+/* Error alert box */
 .alert {
     padding: 15px;
     background-color: #f44336; /* Red */
@@ -185,6 +172,15 @@ form input[type="submit"]:focus {
     color: #d8000c;
 }
 
+/* Footer Styling */
+.footer {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+    flex-shrink: 0; /* Ensure the footer remains centered */
+}
 
 /* Mobile View Styling */
 @media (max-width: 768px) {
@@ -239,7 +235,7 @@ form input[type="submit"]:focus {
     
                 <div class="tab-buttons">
                     <button class="tab-button active" onclick="switchTab(event, 'student-form')">Student Wise</button>
-                    <button class="tab-button" onclick="switchTab(event, 'school-form')">School Wise</button>
+                    <button class="tab-button" onclick="switchTab(event, 'school-form')">Dars Wise</button>
                 </div>
     
                 <div id="student-form" class="tab-content active">
@@ -253,7 +249,7 @@ form input[type="submit"]:focus {
                 <div id="school-form" class="tab-content">
                     <form action="{{ route('school.results') }}" method="POST">
                         @csrf
-                        <input type="text" name="school_code" placeholder="Enter School Code" required>
+                        <input type="text" name="school_code" placeholder="Enter Dars Code" required>
                         <input type="submit" value="Search">
                     </form>
                 </div>

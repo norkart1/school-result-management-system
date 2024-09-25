@@ -23,13 +23,15 @@
 
             <!-- Grade Counts -->
             <div class="grade-counts">
-                <p>Distinction: <span>{{ $gradeCounts['Distinction'] }}</span> | 
+                <p>Top Plus: <span>{{ $gradeCounts['Top Plus'] }}</span> | 
+                   Distinction: <span>{{ $gradeCounts['Distinction'] }}</span> | 
                    First Class: <span>{{ $gradeCounts['First Class'] }}</span> | 
                    Second Class: <span>{{ $gradeCounts['Second Class'] }}</span> | 
                    Third Class: <span>{{ $gradeCounts['Third Class'] }}</span> | 
                    Failed: <span>{{ $gradeCounts['Failed'] }}</span> | 
                    Not Promoted: <span>{{ $gradeCounts['Not Promoted'] }}</span></p>
             </div>
+            
 
             <table class="school-results-table">
                 <thead>

@@ -75,14 +75,16 @@ class StudentController extends Controller
         }
 
         // Grade counts
-        $gradeCounts = [
-            'Distinction' => $students->where('grade', 'Distinction')->count(),
-            'First Class' => $students->where('grade', 'First Class')->count(),
-            'Second Class' => $students->where('grade', 'Second Class')->count(),
-            'Third Class' => $students->where('grade', 'Third Class')->count(),
-            'Failed' => $students->where('grade', 'Failed')->count(),
-            'Not Promoted' => $students->where('grade', 'Not Promoted')->count(),
-        ];
+    $gradeCounts = [
+    'Top Plus' => $students->where('grade', 'Top Plus')->count(), // Add Top Plus grade count
+    'Distinction' => $students->where('grade', 'Distinction')->count(),
+    'First Class' => $students->where('grade', 'First Class')->count(),
+    'Second Class' => $students->where('grade', 'Second Class')->count(),
+    'Third Class' => $students->where('grade', 'Third Class')->count(),
+    'Failed' => $students->where('grade', 'Failed')->count(),
+    'Not Promoted' => $students->where('grade', 'Not Promoted')->count(),
+    ];
+
 
         // Return a view with the list of students and grade counts
         return view('students.school_results', [

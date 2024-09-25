@@ -50,11 +50,20 @@
                     @foreach ($student->subjects as $subject)
                         <tr>
                             <td>{{ $subject['subject'] }}</td>
-                            <td>{{ $subject['marks'] }}</td>
+                            <td>
+                                @if($subject['marks'] === 'غ')
+                                    {{ 'غ' }} <!-- Display غ for absent -->
+                                @elseif($subject['marks'] == 0)
+                                    {{ '0' }} <!-- Display 0 if marks are zero -->
+                                @else
+                                    {{ $subject['marks'] }} <!-- Otherwise, show actual marks -->
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            
 
             <!-- Exclude from PDF -->
             <div class="message" id="message-section">

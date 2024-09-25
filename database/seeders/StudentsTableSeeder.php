@@ -42,10 +42,11 @@ class StudentsTableSeeder extends Seeder
                 // Ensure that the `subjects` column is valid JSON
                 $subjectsJson = $data[4];
 
-                // Replace empty "marks" fields (without value) with a default value `null`
+                // Replace empty "marks" fields or marks as "غ" (absent) with a default value `0`
                 $subjectsJson = preg_replace_callback('/"marks"\s*:\s*([^,}\]]*)/', function ($matches) {
-                    // If the match is empty or invalid, set the value to `null`
-                    return (trim($matches[1]) === '') ? '"marks":null' : $matches[0];
+                    // Replace empty or absent marks ("غ") with 0
+                    $mark = trim($matches[1]);
+                    return (empty($mark) || $mark === 'غ') ? '"marks":0' : $matches[0];
                 }, $subjectsJson);
 
                 // Decode the JSON and validate
@@ -56,6 +57,11 @@ class StudentsTableSeeder extends Seeder
                     continue; // Skip rows with invalid JSON
                 }
 
+                // Calculate total marks, treating absent marks as `0`
+                $totalMarks = collect($decodedSubjects)->sum(function($subject) {
+                    return is_numeric($subject['marks']) ? $subject['marks'] : 0;
+                });
+
                 // Insert the data into the database
                 DB::table('students')->insert([
                     'roll_number'   => $data[0],
@@ -63,7 +69,7 @@ class StudentsTableSeeder extends Seeder
                     'school_code'   => $data[2],
                     'category_code' => $data[3],
                     'subjects'      => json_encode($decodedSubjects),  // Ensure it's a valid JSON string
-                    'total_marks'   => $data[5],
+                    'total_marks'   => $totalMarks,  // Correctly set total marks
                     'grade'         => $data[6],
                 ]);
 

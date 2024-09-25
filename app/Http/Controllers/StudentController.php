@@ -28,13 +28,18 @@ class StudentController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Search the student by roll number
+        // Search the student by roll number including those with 0 marks
         $student = Student::where('roll_number', $request->roll_number)->first();
 
         if (!$student) {
             // If student is not found, return a message
             return redirect()->back()->with('error', 'Student not found.');
         }
+
+        // Calculate total marks, treating 'غ' (absent) as 0
+        $student->total_marks = collect($student->subjects)->sum(function($subject) {
+            return $subject['marks'] === 'غ' ? 0 : $subject['marks'];
+        });
 
         // If student is found, return a view with the student data
         return view('students.result', ['student' => $student]);
@@ -53,15 +58,22 @@ class StudentController extends Controller
         $request->validate([
             'school_code' => 'required|string',
         ]);
-    
+
         // Search for all students by the school code
         $students = Student::where('school_code', $request->school_code)->get();
-    
+
+        // Calculate total marks for each student, treating 'غ' (absent) as 0
+        foreach ($students as $student) {
+            $student->total_marks = collect($student->subjects)->sum(function($subject) {
+                return $subject['marks'] === 'غ' ? 0 : $subject['marks'];
+            });
+        }
+
         // If no students found, return an error message
         if ($students->isEmpty()) {
             return redirect()->back()->with('error', 'No school found in this school code.');
         }
-    
+
         // Grade counts
         $gradeCounts = [
             'Distinction' => $students->where('grade', 'Distinction')->count(),
@@ -71,7 +83,7 @@ class StudentController extends Controller
             'Failed' => $students->where('grade', 'Failed')->count(),
             'Not Promoted' => $students->where('grade', 'Not Promoted')->count(),
         ];
-    
+
         // Return a view with the list of students and grade counts
         return view('students.school_results', [
             'students' => $students,
@@ -79,46 +91,46 @@ class StudentController extends Controller
             'gradeCounts' => $gradeCounts
         ]);
     }
-    
 
     // Download the result as PDF
-// Method to generate and download PDF
+    public function download($roll_number)
+    {
+        // Find the student by roll number
+        $student = Student::where('roll_number', $roll_number)->first();
 
+        if (!$student) {
+            return redirect()->back()->with('error', 'Student not found.');
+        }
 
-public function download($roll_number)
-{
-    // Find the student by roll number
-    $student = Student::where('roll_number', $roll_number)->first();
+        // Calculate total marks, treating 'غ' (absent) as 0
+        $student->total_marks = collect($student->subjects)->sum(function($subject) {
+            return $subject['marks'] === 'غ' ? 0 : $subject['marks'];
+        });
 
-    if (!$student) {
-        return redirect()->back()->with('error', 'Student not found.');
+        // Load the view file for generating the PDF, passing the student data
+        $html = view('students.pdf_result', compact('student'))->render();
+
+        // Create a new instance of mPDF with RTL support
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8', // Ensure the encoding is set to UTF-8 for Arabic support
+            'format' => 'A4',
+            'orientation' => 'P',
+            'default_font' => 'Tajawal', // Ensure the Arabic font
+            'directionality' => 'rtl', // Set the text direction to RTL
+            'autoScriptToLang' => true, // Enable auto script language detection
+            'autoLangToFont' => true,  // Enable automatic language to font assignment
+        ]);
+
+        // Explicitly set RTL direction for the PDF
+        $mpdf->SetDirectionality('rtl');
+        
+        // Write the HTML content to the PDF
+        $mpdf->WriteHTML($html);
+
+        // Set the filename for the PDF
+        $filename = 'result_' . $student->roll_number . '.pdf';
+
+        // Output the PDF to download
+        return $mpdf->Output($filename, 'D'); // 'D' will force download
     }
-
-    // Load the view file for generating the PDF, passing the student data
-    $html = view('students.pdf_result', compact('student'))->render();
-
-    // Create a new instance of mPDF with RTL support
-    $mpdf = new Mpdf([
-        'mode' => 'utf-8', // Ensure the encoding is set to UTF-8 for Arabic support
-        'format' => 'A4',
-        'orientation' => 'P',
-        'default_font' => 'Tajawal', // Ensure the Arabic font
-        'directionality' => 'rtl', // Set the text direction to RTL
-        'autoScriptToLang' => true, // Enable auto script language detection
-        'autoLangToFont' => true,  // Enable automatic language to font assignment
-    ]);
-
-    // Explicitly set RTL direction for the PDF
-    $mpdf->SetDirectionality('rtl');
-    
-    // Write the HTML content to the PDF
-    $mpdf->WriteHTML($html);
-
-    // Set the filename for the PDF
-    $filename = 'result_' . $student->roll_number . '.pdf';
-
-    // Output the PDF to download
-    return $mpdf->Output($filename, 'D'); // 'D' will force download
-}
-
 }

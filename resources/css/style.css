@@ -673,40 +673,61 @@ form input[type="submit"] {
 
 /* School Results Button group for flex layout */
 .school-results-button-group {
-    display: flex; /* Use flexbox to align items in a row */
-    justify-content: space-between; /* Space evenly between buttons */
-    gap: 15px; /* Add space between the buttons */
+    display: flex; /* Use flexbox to align items */
+    flex-direction: column; /* Stack buttons vertically on mobile by default */
+    gap: 15px; /* Space between buttons */
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center; /* Center buttons on mobile */
 }
 
 .school-results-button-container {
-    flex: 1; /* Allow the buttons to adjust to available space */
-    text-align: center; /* Center the button within the container */
+    flex: 1; /* Allow buttons to adjust based on available space */
+    text-align: center;
 }
 
 /* Style for the buttons */
 .school-results-button-container a {
     display: inline-block;
-    padding: 10px 20px; /* Adjusted padding for more width */
-    background-color: transparent; /* Transparent background for stroke effect */
-    border: 2px solid #04AA6D; /* Solid border with green color */
-    color: #04AA6D; /* Text color matching the border */
-    font-size: 16px; /* Slightly smaller font size */
+    padding: 12px 24px; /* Adjust padding for better spacing */
+    background-color: transparent;
+    border: 2px solid #04AA6D;
+    color: #04AA6D;
+    font-size: 16px;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 6px; /* Rounded corners */
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
-    white-space: nowrap; /* Prevent text from wrapping */
-    width: 100%; /* Ensure button takes up full width of the flex item */
-    text-align: center; /* Center the text inside the button */
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    width: 100%; /* Ensure button takes full width of its container on mobile */
+    text-align: center;
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
 /* Hover effect */
 .school-results-button-container a:hover {
-    background-color: #04AA6D; /* On hover, fill the background with green */
-    color: #ffffff; /* Change text color to white on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    background-color: #04AA6D;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Larger screens (tablets and desktops) */
+@media (min-width: 768px) {
+    .school-results-button-group {
+        flex-direction: row; /* Align buttons in a row */
+        justify-content: space-between; /* Space buttons evenly on larger screens */
+        gap: 0; /* Ensure space-between handles gaps */
+    }
+
+    .school-results-button-container {
+        flex-basis: 30%; /* Ensure that each button takes up 30% of the container */
+        max-width: 300px; /* Limit the maximum width of each button */
+    }
+
+    .school-results-button-container a {
+        width: 100%; /* Ensure button takes full width of its flex container */
+        padding: 12px 40px; /* Increase padding for larger screens */
+    }
 }
 
 /* Hide school results button group in print and PDF view */

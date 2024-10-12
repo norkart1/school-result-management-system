@@ -8,6 +8,10 @@ Route::get('/', function () {
     return view('new-form');
 })->name('students.index');
 
+/// Route to generate PDF based on roll number
+Route::get('/students/download/{roll_number}', [StudentController::class, 'download'])->name('students.download');
+
+
 // Both result in Single Page
 
 // Route to display the results search page
@@ -36,11 +40,6 @@ Route::post('/school-results', [StudentController::class, 'getSchoolResults'])->
 
 // Search results route - Handles the search functionality
 Route::post('/search', [StudentController::class, 'search'])->name('students.search');
-
-// PDF DOWNLOAD
-
-// Route to generate PDF based on roll number
-Route::get('/students/download/{roll_number}', [StudentController::class, 'download'])->name('students.download');
 
 // TEST ROUTE
 

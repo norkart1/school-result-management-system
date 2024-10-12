@@ -1,0 +1,10 @@
+{
+    "amiri": {
+        "normal": "D:\\Salman Faizy\\web developments\\laravel projects\\examResults\\public\\fonts\/amiri_normal_b3dcaa7c6265895c533fc2889e1caef5",
+        "bold": "amiri_bold_b6da3d67a31a46f4779d443786f8fa83"
+    },
+    "tajawal": {
+        "normal": "D:\\Salman Faizy\\web developments\\laravel projects\\examResults\\public\\fonts\/tajawal_normal_bf388ac22a69bc2fb2e3fe54dcaf19bb",
+        "bold": "tajawal_bold_f42d84a4b8cecb87978ffa746f8d0dd2"
+    }
+}

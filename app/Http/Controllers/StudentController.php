@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Mpdf\Mpdf; // Import the mPDF class
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\Facade\Pdf; // Import the DomPDF facade
+use ArPHP\I18N\Arabic;
+
 
 class StudentController extends Controller
 {
@@ -96,43 +98,32 @@ class StudentController extends Controller
 
     // Download the result as PDF
     public function download($roll_number)
-    {
-        // Find the student by roll number
-        $student = Student::where('roll_number', $roll_number)->first();
+{
+    // Log the start time
+    $start = microtime(true);
 
-        if (!$student) {
-            return redirect()->back()->with('error', 'Student not found.');
-        }
+    // Find the student by roll number
+    $student = Student::where('roll_number', $roll_number)->first();
 
-        // Calculate total marks, treating 'غ' (absent) as 0
-        $student->total_marks = collect($student->subjects)->sum(function($subject) {
-            return $subject['marks'] === 'غ' ? 0 : $subject['marks'];
-        });
-
-        // Load the view file for generating the PDF, passing the student data
-        $html = view('students.pdf_result', compact('student'))->render();
-
-        // Create a new instance of mPDF with RTL support
-        $mpdf = new Mpdf([
-            'mode' => 'utf-8', // Ensure the encoding is set to UTF-8 for Arabic support
-            'format' => 'A4',
-            'orientation' => 'P',
-            'default_font' => 'Tajawal', // Ensure the Arabic font
-            'directionality' => 'rtl', // Set the text direction to RTL
-            'autoScriptToLang' => true, // Enable auto script language detection
-            'autoLangToFont' => true,  // Enable automatic language to font assignment
-        ]);
-
-        // Explicitly set RTL direction for the PDF
-        $mpdf->SetDirectionality('rtl');
-        
-        // Write the HTML content to the PDF
-        $mpdf->WriteHTML($html);
-
-        // Set the filename for the PDF
-        $filename = 'result_' . $student->roll_number . '.pdf';
-
-        // Output the PDF to download
-        return $mpdf->Output($filename, 'D'); // 'D' will force download
+    if (!$student) {
+        return redirect()->back()->with('error', 'Student not found.');
     }
+
+    // Calculate total marks, treating 'غ' (absent) as 0
+    $student->total_marks = collect($student->subjects)->sum(function ($subject) {
+        return $subject['marks'] === 'غ' ? 0 : $subject['marks'];
+    });
+
+    // Log time for student data processing
+    Log::info('Time after fetching student data: ' . (microtime(true) - $start) . ' seconds');
+
+    // Load the PDF view
+    $pdf = Pdf::loadView('students.pdf_result', compact('student'))->setPaper('a4', 'portrait');
+
+    // Log time after PDF generation
+    Log::info('Time after PDF generation: ' . (microtime(true) - $start) . ' seconds');
+
+    // Return the PDF for download
+    return $pdf->download('result_' . $student->roll_number . '.pdf');
+}
 }

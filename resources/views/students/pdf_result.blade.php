@@ -1,211 +1,253 @@
+<?php
+
+use \ArPHP\I18N\Arabic; // Ensure the correct namespace
+
+// Initialize ArPHP Arabic shaping library
+$arabic = new Arabic('Glyphs');
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result PDF</title>
+    <title>Exam Results</title>
+
     <style>
-       /* General Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Tajawal', sans-serif; /* Ensure Tajawal is used for both English and Arabic */
-}
+        /* Import Custom Fonts */
+        @font-face {
+            font-family: 'Amiri';
+            src: url('{{ public_path('fonts/Amiri-Regular.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-body {
-        font-family: 'Tajawal', sans-serif;
-        direction: rtl; /* Ensure right-to-left direction for Arabic text */
-        text-align: right; /* Align text to the right */
-    }
+        @font-face {
+            font-family: 'Amiri';
+            src: url('{{ public_path('fonts/Amiri-Bold.ttf') }}') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
 
-    .results-table th, .results-table td {
-        text-align: right; /* Ensure table data is right-aligned for Arabic */
-    }
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('{{ public_path('fonts/Tajawal-Regular.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-    h1, h3 {
-        text-align: center; /* Center align headings */
-    }
+        /* General Styles */
+        body {
+            font-family: 'Amiri', sans-serif;
+            direction: rtl;
+            background-color: #ffffff;
+            padding: 20px;
+            color: #333;
+        }
 
-/* Container */
-.results-view {
-    font-family: 'Tajawal', sans-serif;
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #333;
-    text-align: center; /* Centered text for headings */
-}
+        /* Header Styling */
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-/* Headings */
-.results-view h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #108775;
-    text-align: center;
-}
+        .header img {
+            width: 100%;
+            height: auto;
+        }
 
-.results-view p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #333;
-    text-align: right; /* Align text to the right for Arabic */
-}
+        h1 {
+            font-family: 'Amiri', sans-serif;
+            font-size: 32px;
+            color: #108775;
+            margin-bottom: 10px;
+            text-align: center;
+        }
 
-/* Subject Marks Table */
-.results-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #ffffff;
-}
+        /* Results Details */
+        .results-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
 
-.results-table th, .results-table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    text-align: right; /* Align text to the right for RTL content */
-    font-family: 'Tajawal', sans-serif; /* Ensure Tajawal font is applied */
-}
+        .results-details .left, .results-details .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-.results-table th {
-    background-color: #108775; /* Use a solid color for better mPDF compatibility */
-    color: #ffffff;
-    font-size: 16px;
-}
+        .results-details .left p,
+        .results-details .right p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
 
-.results-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
+        .results-details .left p {
+            text-align: left;
+            font-family: 'Tajawal', sans-serif;
+        }
 
-.results-table tr:hover {
-    background-color: #f1f1f1;
-    transition: background-color 0.3s ease;
-}
+        /* Align right values first, label second */
+        .results-details .right p {
+            text-align: right;
+            direction: rtl;
+            font-family: 'Tajawal', sans-serif;
+        }
 
-/* Responsive behavior is generally not needed for PDFs */
+        /* Title styling for right column */
+        .results-details .right p strong {
+            font-weight: bold; /* Set the titles to bold */
+            color: #333;
+        }
 
-/* Button Group (Won't be used in PDF but included for consistency) */
-.results-view .button-group {
-    display: none; /* Hide buttons in PDF */
-}
+        /* Value styling for right column */
+        .results-details .right p .value {
+            font-weight: normal; /* Set the values to normal */
+            color: #108775;
+        }
 
-/* Message Box (Hidden in PDF) */
-.message {
-    display: none;
-}
+        .results-details .right p .label {
+            display: inline-block;
+            margin-left: 10px;
+            width: auto;
+            font-weight: bold;
+        }
 
-/* Footer */
-.results-view .copyright {
-    text-align: center;
-    font-size: 14px;
-    color: #333;
-    margin-top: 20px;
-    font-family: 'Tajawal', sans-serif;
-}
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px;
+            font-family: 'Tajawal', sans-serif;
+            table-layout: fixed;
+        }
 
-.copyright {
-    text-align: center; /* Center the text */
-    font-size: 14px; /* Adjust font size as needed */
-    color: #333; /* Set the text color */
-    margin-top: 20px; /* Add some space above the copyright text */
-    font-family: 'Tajawal', sans-serif; /* Ensure Tajawal font is applied */
-}
+        table th, table td {
+            padding: 8px 10px; /* Reduced padding for smaller row height */
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid #ddd; /* Narrow stroke lines */
+        }
 
+        /* Column width adjustments */
+        table th:nth-child(1), table td:nth-child(1) {
+            width: 15%; /* 15% for marks column */
+        }
 
-/* Table Styling */
-.school-results-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #ffffff;
-    border-spacing: 0;
-}
+        table th:nth-child(2), table td:nth-child(2) {
+            width: 85%; /* 85% for subjects column */
+        }
 
-.school-results-table th, .school-results-table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: center;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px;
-}
+        /* Dark Gradient background color for table header */
+        table th {
+            background-color: #2F4960;
+            background-image: linear-gradient(to bottom, #00BC7E, #108775);
+            color: white;
+        }
 
-.school-results-table th {
-    background-color: #108775; /* Solid color for mPDF compatibility */
-    color: #ffffff;
-    font-size: 16px;
-}
+        /* Apply border-radius to specific opposite corners */
+        table th:first-child {
+            border-top-left-radius: 12px; /* Top-left for subject */
+        }
 
-.school-results-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
+        table th:last-child {
+            border-top-right-radius: 12px; /* Top-right for marks */
+        }
 
-.school-results-table tr:hover {
-    background-color: #f1f1f1;
-    transition: background-color 0.3s ease;
-}
+        table tr:last-child td:first-child {
+            border-bottom-left-radius: 12px; /* Bottom-left for subject */
+        }
 
-/* Table Borders for PDF */
-.results-table th:first-child, .results-table td:first-child {
-    border-left: 1px solid #ddd;
-}
+        table tr:last-child td:last-child {
+            border-bottom-right-radius: 12px; /* Bottom-right for marks */
+        }
 
-.results-table th:last-child, .results-table td:last-child {
-    border-right: 1px solid #ddd;
-}
+        /* Even row background color */
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-.results-table th:first-child {
-    border-top-left-radius: 12px;
-}
+        table tr:hover {
+            background-color: #f1f1f1;
+            transition: background-color 0.3s ease;
+        }
 
-.results-table th:last-child {
-    border-top-right-radius: 12px;
-}
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+            color: #333;
+            font-family: 'Tajawal', sans-serif;
+        }
 
-.results-table tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
-}
+        .footer p {
+            margin: 0;
+        }
 
-.results-table tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
-}
+        /* Adjust line height */
+        body, p, table td {
+            line-height: 1.2;
+        }
 
+        /* Reduce margin and padding to fit single page */
+        .results-details p {
+            margin: 5px 0;
+        }
+
+        /* Hide unwanted elements for printing */
+        @media print {
+            .footer {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="results-view">
-        <img src="{{ asset('images/header.svg') }}" alt="Header Image" class="responsive-header">
-        <h1>{{ $student->name }}</h1>
-        <p><strong>Roll Number:</strong> {{ $student->roll_number }}</p>
-        <p><strong>School Code:</strong> {{ $student->school_code }}</p>
-        <p><strong>Category:</strong> {{ $student->category_code }}</p>
-        <p><strong>Total Marks:</strong> {{ $student->total_marks }}</p>
-        <p><strong>Grade:</strong> {{ $student->grade }}</p>
 
-        <h3>Subject Marks:</h3>
-        <table class="results-table">
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Marks</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($student->subjects as $subject)
-                    <tr>
-                        <td>{{ $subject['subject'] }}</td>
-                        <td>{{ $subject['marks'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <div class="copyright">
-            <p>© SUFFA DARS COORDINATION</p>
-        </div>
-        
+    <!-- Add the header image -->
+    <div class="header">
+        <img src="{{ public_path('images/header.png') }}" alt="Header Image" style="width: 100%; height: auto;">
     </div>
+
+    <h1>{{ $arabic->utf8Glyphs($student->name) }}</h1>
+
+    <div class="results-details">
+        <div class="left">
+            <p><strong>Total Marks:</strong> {{ $student->total_marks }}</p>
+            <p><strong>Grade:</strong> {{ $arabic->utf8Glyphs($student->grade) }}</p>
+        </div>
+        <div class="right">
+            <p><span class="value">{{ $student->roll_number }}</span><span class="label">:Roll Number</span></p>
+            <p><span class="value">{{ $student->school_code }}</span><span class="label">:Dars Code</span></p>
+            <p><span class="value">{{ $arabic->utf8Glyphs($student->category_code) }}</span><span class="label">:Category</span></p>
+        </div>
+    </div>
+
+    <table class="results-table">
+        <thead>
+            <tr>
+                <th>Marks</th>
+                <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($student->subjects as $subject)
+                <tr>
+                    <td>{{ $subject['marks'] == 0 ? '0' : $subject['marks'] }}</td>
+                    <td>{{ $arabic->utf8Glyphs($subject['subject']) }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>© SUFFA DARS COORDINATION</p>
+    </div>
+
 </body>
 </html>

@@ -37,6 +37,13 @@ $arabic = new Arabic('Glyphs');
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'Raleway';
+            src: url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* General Styles */
         body {
             font-family: 'Amiri', sans-serif;
@@ -59,7 +66,7 @@ $arabic = new Arabic('Glyphs');
 
         h1 {
             font-family: 'Amiri', sans-serif;
-            font-size: 32px;
+            font-size: 35px; /* Slightly increased for student name */
             color: #108775;
             margin-bottom: 10px;
             text-align: center;
@@ -80,7 +87,7 @@ $arabic = new Arabic('Glyphs');
 
         .results-details .left p,
         .results-details .right p {
-            font-size: 18px;
+            font-size: 16px; /* Uniform font size for all titles */
             margin-bottom: 10px;
             color: #333;
         }
@@ -99,20 +106,22 @@ $arabic = new Arabic('Glyphs');
 
         /* Title styling for right column */
         .results-details .right p strong {
-            font-weight: bold; /* Set the titles to bold */
+            font-family: 'Raleway', sans-serif; /* Set titles to Raleway */
+            font-weight: bold; /* Keep bold */
             color: #333;
         }
 
         /* Value styling for right column */
         .results-details .right p .value {
-            font-weight: normal; /* Set the values to normal */
-            color: #108775;
+            font-weight: normal; /* Set values to normal */
+            color: #000000; /* Values in black */
         }
 
         .results-details .right p .label {
             display: inline-block;
             margin-left: 10px;
             width: auto;
+            font-family: 'Raleway', sans-serif; /* Use Raleway for titles */
             font-weight: bold;
         }
 

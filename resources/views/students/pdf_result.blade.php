@@ -153,7 +153,8 @@ $arabic = new Arabic('Glyphs');
 
         /* Dark Gradient background color for table header */
         table th {
-            background-color: #2F4960;
+            background-color: #108775;
+            /* background-color: #2F4960; */
             background-image: linear-gradient(to bottom, #00BC7E, #108775);
             color: white;
         }

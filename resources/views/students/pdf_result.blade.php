@@ -1,11 +1,4 @@
-<?php
 
-use \ArPHP\I18N\Arabic; // Ensure the correct namespace
-
-// Initialize ArPHP Arabic shaping library
-$arabic = new Arabic('Glyphs');
-
-?>
 
 <!DOCTYPE html>
 <html lang="ar">
@@ -75,9 +68,10 @@ $arabic = new Arabic('Glyphs');
         /* Results Details */
         .results-details {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
+            justify-content: space-between;  /* Ensures left and right sections stay side by side */
+            align-items: flex-start;  /* Align the top of both sections */
             gap: 20px;
+            margin-bottom: 15px;
         }
 
         .results-details .left, .results-details .right {
@@ -88,7 +82,6 @@ $arabic = new Arabic('Glyphs');
 
         .results-details .left p,
         .results-details .right p {
-            
             margin-bottom: 10px;
             color: #333;
         }

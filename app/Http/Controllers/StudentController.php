@@ -109,6 +109,9 @@ class StudentController extends Controller
         return redirect()->back()->with('error', 'Student not found.');
     }
 
+    // Initialize the Arabic shaping class
+    $arabic = new \ArPHP\I18N\Arabic('Glyphs'); // Make sure to use the proper namespace
+
     // Calculate total marks, treating 'غ' (absent) as 0
     $student->total_marks = collect($student->subjects)->sum(function ($subject) {
         return $subject['marks'] === 'غ' ? 0 : $subject['marks'];
@@ -117,8 +120,8 @@ class StudentController extends Controller
     // Log time for student data processing
     Log::info('Time after fetching student data: ' . (microtime(true) - $start) . ' seconds');
 
-    // Load the PDF view
-    $pdf = Pdf::loadView('students.pdf_result', compact('student'))->setPaper('a4', 'portrait');
+    // Load the PDF view and pass the Arabic instance as well
+    $pdf = Pdf::loadView('students.pdf_result', compact('student', 'arabic'))->setPaper('a4', 'portrait');
 
     // Log time after PDF generation
     Log::info('Time after PDF generation: ' . (microtime(true) - $start) . ' seconds');
@@ -126,4 +129,5 @@ class StudentController extends Controller
     // Return the PDF for download
     return $pdf->download('result_' . $student->roll_number . '.pdf');
 }
+
 }

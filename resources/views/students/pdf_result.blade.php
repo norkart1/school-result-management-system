@@ -77,6 +77,7 @@ $arabic = new Arabic('Glyphs');
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
+            gap: 20px;
         }
 
         .results-details .left, .results-details .right {
@@ -87,18 +88,19 @@ $arabic = new Arabic('Glyphs');
 
         .results-details .left p,
         .results-details .right p {
-            font-size: 16px; /* Uniform font size for all titles */
+            
             margin-bottom: 10px;
             color: #333;
         }
 
         .results-details .left p {
+            font-size: 15px;
             text-align: left;
             font-family: 'Tajawal', sans-serif;
         }
 
-        /* Align right values first, label second */
         .results-details .right p {
+            font-size: 13px;
             text-align: right;
             direction: rtl;
             font-family: 'Tajawal', sans-serif;
@@ -107,13 +109,13 @@ $arabic = new Arabic('Glyphs');
         /* Title styling for right column */
         .results-details .right p strong {
             font-family: 'Raleway', sans-serif; /* Set titles to Raleway */
-            font-weight: bold; /* Keep bold */
+            font-weight: bold;
             color: #333;
         }
 
         /* Value styling for right column */
         .results-details .right p .value {
-            font-weight: normal; /* Set values to normal */
+            font-weight: normal;
             color: #000000; /* Values in black */
         }
 
@@ -136,45 +138,43 @@ $arabic = new Arabic('Glyphs');
         }
 
         table th, table td {
-            padding: 8px 10px; /* Reduced padding for smaller row height */
+            padding: 8px 10px;
             text-align: center;
             font-size: 16px;
-            border: 1px solid #ddd; /* Narrow stroke lines */
+            border: 1px solid #ddd;
         }
 
         /* Column width adjustments */
         table th:nth-child(1), table td:nth-child(1) {
-            width: 15%; /* 15% for marks column */
+            width: 15%;
         }
 
         table th:nth-child(2), table td:nth-child(2) {
-            width: 85%; /* 85% for subjects column */
+            width: 85%;
         }
 
         /* Dark Gradient background color for table header */
         table th {
             background-color: #108775;
-            /* background-color: #2F4960; */
             background-image: linear-gradient(to bottom, #00BC7E, #108775);
-            /* background-image: linear-gradient(to top right, red, #f06d06); */
             color: white;
         }
 
         /* Apply border-radius to specific opposite corners */
         table th:first-child {
-            border-top-left-radius: 12px; /* Top-left for subject */
+            border-top-left-radius: 12px;
         }
 
         table th:last-child {
-            border-top-right-radius: 12px; /* Top-right for marks */
+            border-top-right-radius: 12px;
         }
 
         table tr:last-child td:first-child {
-            border-bottom-left-radius: 12px; /* Bottom-left for subject */
+            border-bottom-left-radius: 12px;
         }
 
         table tr:last-child td:last-child {
-            border-bottom-right-radius: 12px; /* Bottom-right for marks */
+            border-bottom-right-radius: 12px;
         }
 
         /* Even row background color */

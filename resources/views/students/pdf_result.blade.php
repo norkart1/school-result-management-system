@@ -156,6 +156,7 @@ $arabic = new Arabic('Glyphs');
             background-color: #108775;
             /* background-color: #2F4960; */
             background-image: linear-gradient(to bottom, #00BC7E, #108775);
+            /* background-image: linear-gradient(to top right, red, #f06d06); */
             color: white;
         }
 

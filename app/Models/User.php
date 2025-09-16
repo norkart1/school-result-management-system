@@ -23,6 +23,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that are protected from mass assignment.
+     *
+     * @var array<int, string>
+     */
+    protected $guarded = [
+        'is_admin',
+    ];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -42,6 +51,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 }

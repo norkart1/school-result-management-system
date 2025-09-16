@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AdminAuthController;
 
 // Redirect the home route to /new-form
 Route::get('/', function () {
@@ -53,4 +54,33 @@ Route::get('/test-csv', function () {
 
     $content = file_get_contents($csvPath);
     return nl2br($content); // Outputs the file content
+});
+
+// ADMIN ROUTES
+
+// Admin login routes
+Route::middleware(['guest'])->group(function () {
+    Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login.form');
+    Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('throttle:5,1');
+});
+
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth');
+
+// Protected admin routes
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
+    
+    // Student Management
+    Route::get('/admin/students/create', [\App\Http\Controllers\Admin\StudentController::class, 'create'])->name('admin.students.create');
+    Route::post('/admin/students', [\App\Http\Controllers\Admin\StudentController::class, 'store'])->name('admin.students.store');
+    Route::get('/admin/schools', [\App\Http\Controllers\Admin\StudentController::class, 'listBySchool'])->name('admin.schools');
+    Route::get('/admin/schools/{schoolCode}', [\App\Http\Controllers\Admin\StudentController::class, 'showSchool'])->name('admin.schools.show');
+});
+
+// Redirect /admin to login or dashboard based on auth status
+Route::get('/admin', function () {
+    if (auth()->check() && auth()->user()->is_admin) {
+        return redirect('/admin/dashboard');
+    }
+    return redirect('/admin/login');
 });

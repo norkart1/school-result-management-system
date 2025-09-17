@@ -93,7 +93,7 @@
                     <strong>PHP Version:</strong> {{ PHP_VERSION }}
                 </div>
                 <div style="padding: 1rem; background: #f8f9fa; border-radius: 5px;">
-                    <strong>Database:</strong> SQLite
+                    <strong>Database:</strong> {{ ucfirst(config('database.default')) }} ({{ DB::connection()->getDriverName() }})
                 </div>
                 <div style="padding: 1rem; background: #f8f9fa; border-radius: 5px;">
                     <strong>Environment:</strong> {{ config('app.env') }}

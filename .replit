@@ -4,6 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["pgadmin4"]
 
 [workflows]
 runButton = "Project"
@@ -21,13 +22,13 @@ args = "Laravel Server"
 name = "Laravel Server"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "php artisan serve --host=0.0.0.0 --port=5000"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "DB_CONNECTION=pgsql php artisan serve --host=0.0.0.0 --port=5000"
+waitForPort = 5000
 
 [[ports]]
 localPort = 5000

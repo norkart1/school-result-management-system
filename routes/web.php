@@ -42,10 +42,13 @@ Route::post('/school-results', [StudentController::class, 'getSchoolResults'])->
 // Search results route - Handles the search functionality
 Route::post('/search', [StudentController::class, 'search'])->name('students.search');
 
-// TEST ROUTE
-
-// Test route - To test if the CSV file is accessible and readable
+// TEST ROUTE - Secured for development only
 Route::get('/test-csv', function () {
+    // Only allow in local development environment
+    if (!app()->environment('local')) {
+        abort(404);
+    }
+    
     $csvPath = storage_path('app/results.csv');
 
     if (!file_exists($csvPath)) {
@@ -54,7 +57,7 @@ Route::get('/test-csv', function () {
 
     $content = file_get_contents($csvPath);
     return nl2br($content); // Outputs the file content
-});
+})->middleware(['auth', 'admin']);
 
 // ADMIN ROUTES
 

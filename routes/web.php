@@ -65,15 +65,15 @@ Route::any('/adminer', '\Onecentlin\Adminer\AdminerController@index')->middlewar
 // ADMIN ROUTES
 
 // Admin login routes
-Route::middleware(['guest'])->group(function () {
+Route::middleware(['web', 'guest'])->group(function () {
     Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login.form');
     Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login')->middleware('throttle:5,1');
 });
 
-Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth');
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware(['web', 'auth']);
 
 // Protected admin routes
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['web', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
     
     // Student Management - Full CRUD
@@ -96,4 +96,4 @@ Route::get('/admin', function () {
         return redirect('/admin/dashboard');
     }
     return redirect('/admin/login');
-});
+})->middleware('web');

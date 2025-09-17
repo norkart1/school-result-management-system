@@ -24,7 +24,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "DB_CONNECTION=sqlite APP_URL=https://e8ad78d3-0ecf-4c95-b295-cb634a26d9b2-00-1aqx79ciwt1m9.janeway.replit.dev SESSION_SECURE_COOKIE=false SESSION_SAME_SITE=lax php artisan serve --host=0.0.0.0 --port=5000"
+args = "DB_CONNECTION=sqlite SESSION_DRIVER=file SESSION_SECURE_COOKIE=false SESSION_SAME_SITE=lax APP_URL=https://e8ad78d3-0ecf-4c95-b295-cb634a26d9b2-00-1aqx79ciwt1m9.janeway.replit.dev php artisan serve --host=0.0.0.0 --port=5000"
 waitForPort = 5000
 
 [workflows.workflow.metadata]

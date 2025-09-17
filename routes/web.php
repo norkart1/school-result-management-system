@@ -57,7 +57,7 @@ Route::get('/test-csv', function () {
 
     $content = file_get_contents($csvPath);
     return nl2br($content); // Outputs the file content
-})->middleware(['auth', 'admin']);
+})->middleware(['web', 'auth', 'admin']);
 
 // DATABASE MANAGEMENT - Adminer (PostgreSQL phpMyAdmin alternative)
 Route::any('/adminer', '\Onecentlin\Adminer\AdminerController@index')->middleware(['web', 'admin'])->name('adminer');
@@ -73,7 +73,7 @@ Route::middleware(['web', 'guest'])->group(function () {
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware(['web', 'auth']);
 
 // Protected admin routes
-Route::middleware(['web', 'admin'])->group(function () {
+Route::middleware(['web', 'auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
     
     // Student Management - Full CRUD

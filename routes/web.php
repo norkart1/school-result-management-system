@@ -73,9 +73,16 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
     
-    // Student Management
+    // Student Management - Full CRUD
+    Route::get('/admin/students', [\App\Http\Controllers\Admin\StudentController::class, 'index'])->name('admin.students.index');
     Route::get('/admin/students/create', [\App\Http\Controllers\Admin\StudentController::class, 'create'])->name('admin.students.create');
     Route::post('/admin/students', [\App\Http\Controllers\Admin\StudentController::class, 'store'])->name('admin.students.store');
+    Route::get('/admin/students/{student}', [\App\Http\Controllers\Admin\StudentController::class, 'show'])->name('admin.students.show');
+    Route::get('/admin/students/{student}/edit', [\App\Http\Controllers\Admin\StudentController::class, 'edit'])->name('admin.students.edit');
+    Route::put('/admin/students/{student}', [\App\Http\Controllers\Admin\StudentController::class, 'update'])->name('admin.students.update');
+    Route::delete('/admin/students/{student}', [\App\Http\Controllers\Admin\StudentController::class, 'destroy'])->name('admin.students.destroy');
+    
+    // School Management
     Route::get('/admin/schools', [\App\Http\Controllers\Admin\StudentController::class, 'listBySchool'])->name('admin.schools');
     Route::get('/admin/schools/{schoolCode}', [\App\Http\Controllers\Admin\StudentController::class, 'showSchool'])->name('admin.schools.show');
 });

@@ -27,16 +27,12 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "DB_CONNECTION=pgsql php artisan serve --host=0.0.0.0 --port=5000"
+args = "DB_CONNECTION=sqlite php artisan serve --host=0.0.0.0 --port=5000"
 waitForPort = 5000
 
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 40211
-externalPort = 3000
 
 [deployment]
 deploymentTarget = "autoscale"

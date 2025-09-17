@@ -59,6 +59,9 @@ Route::get('/test-csv', function () {
     return nl2br($content); // Outputs the file content
 })->middleware(['auth', 'admin']);
 
+// DATABASE MANAGEMENT - Adminer (PostgreSQL phpMyAdmin alternative)
+Route::any('/adminer', '\Onecentlin\Adminer\AdminerController@index')->middleware(['web', 'admin'])->name('adminer');
+
 // ADMIN ROUTES
 
 // Admin login routes
